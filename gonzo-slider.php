@@ -15,6 +15,9 @@ namespace Gonzo\Slider;
 
 require 'inc/namespace.php';
 require 'inc/assets.php';
+require 'inc/image-sizes.php';
 require 'inc/slides.php';
 
 bootstrap();
+
+ImageSizes\bootstrap();

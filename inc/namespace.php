@@ -2,6 +2,8 @@
 
 namespace Gonzo\Slider;
 
+use function Gonzo\Slider\ImageSizes\image_sizes;
+
 /**
  * Declare hooks.
  */
@@ -29,7 +31,13 @@ function display_slider() {
 		'orderby'           => 'menu_order',
 	);
 	$slides = get_posts( $args );
+
 	if ( count( $slides ) > 0 ) {
+		// Temporarily register our image sizes so that we can use them in templates.
+		$sizes = image_sizes();
+		foreach ( $sizes as $size => $atts ) {
+			add_image_size( $size, $atts['width'], $atts['height'], $atts['crop'] );
+		}
 		?>
 		<div class="gonzo-slider">
 			<?php
@@ -45,6 +53,9 @@ function display_slider() {
 			?>
 		</div>
 		<?php
+		foreach ( $sizes as $size => $atts ) {
+			remove_image_size( $size );
+		}
 	}
 }
 
@@ -94,17 +105,17 @@ function header_picture( $attachment_id ) {
 	<picture>
 		<!--[if IE 9]><video style="display: none;"><![endif]-->
 		<?php
-		$srcset_value = wp_get_attachment_image_srcset( $attachment_id, 'gonzo-slider-wide-small' );
+		$srcset_value = wp_get_attachment_image_srcset( $attachment_id, 'gonzo-slider-landscape-small' );
 		$srcset = $srcset_value ? ' srcset="' . esc_attr( $srcset_value ) . '"' : '';
 		?>
 		<source media="(orientation: landscape)" <?php echo$srcset; // WPCS: XSS ok. ?> />
 		<?php
-		$srcset_value = wp_get_attachment_image_srcset( $attachment_id, 'gonzo-slider-square-small' );
+		$srcset_value = wp_get_attachment_image_srcset( $attachment_id, 'gonzo-slider-portrait-small' );
 		$srcset = $srcset_value ? ' srcset="' . esc_attr( $srcset_value ) . '"' : '';
 		?>
 		<source media="(orientation: portrait)" <?php echo $srcset; // WPCS: XSS ok. ?> />
 		<!--[if IE 9]></video><![endif]-->
-		<img src="<?php echo esc_url( wp_get_attachment_image_src( $attachment_id, 'gonzo-slider-wide-medium', false )[0] ); ?>" alt="" />
+		<img src="<?php echo esc_url( wp_get_attachment_image_src( $attachment_id, 'gonzo-slider-landscape-medium', false )[0] ); ?>" alt="" />
 	</picture>
 	<?php
 }
