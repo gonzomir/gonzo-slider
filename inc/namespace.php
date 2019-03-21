@@ -22,7 +22,6 @@ function bootstrap() {
  * @return void
  */
 function display_slider() {
-	global $post;
 
 	$args = array(
 		'post_type'         => 'slide',
@@ -38,21 +37,11 @@ function display_slider() {
 		foreach ( $sizes as $size => $atts ) {
 			add_image_size( $size, $atts['width'], $atts['height'], $atts['crop'] );
 		}
-		?>
-		<div class="gonzo-slider">
-			<?php
-			foreach ( $slides as $post ) {
-				setup_postdata( $post );
-				?>
-				<article id="slide-<?php echo esc_attr( get_the_ID() ); ?>" class="slide">
-					<?php get_plugin_template( 'slide', get_post_format() ); ?>
-				</article>
-				<?php
-			}
-			wp_reset_postdata();
-			?>
-		</div>
-		<?php
+
+		// export vars and get the template part
+		set_query_var( 'slides', $slides );
+		get_plugin_template( 'slider' );
+
 		foreach ( $sizes as $size => $atts ) {
 			remove_image_size( $size );
 		}
@@ -65,7 +54,7 @@ function display_slider() {
  * @param string $slug Template slug.
  * @param string $name Template name.
  */
-function get_plugin_template( $slug, $name ) {
+function get_plugin_template( $slug, $name = '' ) {
 	$located = '';
 
 	$template_names = array();
