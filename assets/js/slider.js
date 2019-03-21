@@ -8,9 +8,12 @@ window.addEventListener( 'DOMContentLoaded', function() {
   var sliderContainer = document.querySelector('.gonzo-slider'),
       slides = document.querySelectorAll('.gonzo-slider .slide'),
       counter = 0,
-      next = 1,
+      step = Math.ceil( sliderContainer.clientWidth / slides[0].clientWidth );
+      next = step,
       activeSlide = null,
       activePage = null;
+
+  sliderContainer.style.height = slides[counter].offsetHeight + 'px';
 
   if (!sliderContainer) return;
   if (!slides || slides.length < 3) return;
@@ -28,10 +31,9 @@ window.addEventListener( 'DOMContentLoaded', function() {
     slides[counter].classList.remove('previous');
     slides[counter].classList.add('active');
     pages[counter].classList.add('active');
-    //sliderContainer.style.height = slides[counter].offsetHeight + 'px';
     activeSlide = slides[counter];
     activePage = pages[counter];
-    counter++;
+    counter = counter + step;
     if(counter >= slides.length){
       counter = 0;
     }
