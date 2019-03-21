@@ -25,7 +25,7 @@ function display_slider() {
 
 	$args = array(
 		'post_type'         => 'slide',
-		'posts_per_page'    => 5,
+		'posts_per_page'    => apply_filters( 'gonzo_slider_slides_limit', 5 ),
 		'order'             => 'ASC',
 		'orderby'           => 'menu_order',
 	);
