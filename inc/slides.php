@@ -8,6 +8,7 @@ namespace Gonzo\Slider\Slides;
 function bootstrap() {
 	add_action( 'init', __NAMESPACE__ . '\register_slides', 0 );
 	add_action( 'cmb2_admin_init', __NAMESPACE__ . '\\slide_button_metabox' );
+	add_action( 'cmb2_admin_init', __NAMESPACE__ . '\\slide_align_metabox' );
 }
 
 /**
@@ -98,6 +99,41 @@ function slide_button_metabox() {
 			'name' => __( 'Button URL', 'gonzo-slider' ),
 			'id'   => '_slide_cta_url',
 			'type' => 'text_url',
+		)
+	);
+
+}
+
+/**
+ * Define the metabox and field configurations for slide alignment.
+ */
+function slide_align_metabox() {
+
+	/**
+	 * Initiate the metabox.
+	 */
+	$cmb = new_cmb2_box(
+		array(
+			'id'           => 'slide_alignment',
+			'title'        => __( 'Slide Alignment', 'gonzo-slider' ),
+			'object_types' => array( 'slide' ), // Post type.
+			'context'      => 'normal',
+			'priority'     => 'high',
+			'show_names'   => true,
+		)
+	);
+
+	$cmb->add_field(
+		array(
+			'name' => __( 'Slide alignment', 'gonzo-slider' ),
+			'id'   => '_slide_alignment',
+			'type' => 'radio',
+			'options'          => array(
+				'left'   => __( 'Left', 'cmb2' ),
+				'center' => __( 'Center', 'cmb2' ),
+				'right'  => __( 'Right', 'cmb2' ),
+			),
+			'default' => 'left',
 		)
 	);
 

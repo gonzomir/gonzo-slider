@@ -57,6 +57,15 @@
 	z-index: 2;
 }
 
+.slide-align-center {
+	align-items: center;
+}
+
+.slide-align-right {
+	align-items: flex-end;
+}
+
+
 .running .slide {
 	transform: translateX(100vw);
 	z-index: 0;
