@@ -1,4 +1,4 @@
-<div class="gonzo-slider">
+<div class="gonzo-slider" data-pager="true">
 	<?php
 	foreach ( $slides as $post ) {
 		setup_postdata( $post );
