@@ -23,6 +23,8 @@ window.addEventListener( 'DOMContentLoaded', function() {
       interval = sliderContainer.dataset.interval || 5000,
       hasPager = sliderContainer.dataset.pager || false,
       hasNav = sliderContainer.dataset.nav || false,
+      prevText = sliderContainer.dataset.prev || '‹',
+      nextText = sliderContainer.dataset.next || '›',
       sliderInterval = null;
 
   function slideForward() {
@@ -153,11 +155,11 @@ window.addEventListener( 'DOMContentLoaded', function() {
     nav.className = 'gonzo-slider-nav';
 
     var prev = document.createElement( 'li' );
-    prev.innerHTML = '<button type="button" id="slider-prev"></button>';
+    prev.innerHTML = '<button type="button" id="slider-prev">' + prevText + '</button>';
     nav.appendChild(prev);
 
     var next = document.createElement( 'li' );
-    next.innerHTML = '<button type="button" id="slider-next"></button>';
+    next.innerHTML = '<button type="button" id="slider-next">' + nextText + '</button>';
     nav.appendChild( next );
 
     prev.querySelector('button').addEventListener( 'click', function( e ) {
