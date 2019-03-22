@@ -1,6 +1,14 @@
 <?php
 
-namespace Gonzo\Slider;
+namespace Gonzo\Slider\Slides;
+
+/**
+ * Declare hooks.
+ */
+function bootstrap() {
+	add_action( 'init', __NAMESPACE__ . '\register_slides', 0 );
+	add_action( 'cmb2_admin_init', __NAMESPACE__ . '\\slide_button_metabox' );
+}
 
 /**
  * Register Custom Post Type for slides.
@@ -57,12 +65,11 @@ function register_slides() {
 	register_post_type( 'slide', $args );
 
 }
-add_action( 'init', __NAMESPACE__ . '\register_slides', 0 );
 
 /**
- * Define the metabox and field configurations.
+ * Define the metabox and field configurations for CTA button fields.
  */
-function slide_metaboxes() {
+function slide_button_metabox() {
 
 	/**
 	 * Initiate the metabox.
@@ -95,4 +102,3 @@ function slide_metaboxes() {
 	);
 
 }
-add_action( 'cmb2_admin_init', __NAMESPACE__ . '\\slide_metaboxes' );

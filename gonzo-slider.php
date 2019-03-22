@@ -19,5 +19,6 @@ require 'inc/image-sizes.php';
 require 'inc/slides.php';
 
 bootstrap();
-
+Slides\bootstrap();
+Assets\bootstrap();
 ImageSizes\bootstrap();

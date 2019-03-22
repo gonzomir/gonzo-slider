@@ -2,6 +2,16 @@
 
 namespace Gonzo\Slider\Assets;
 
+/**
+ * Declare hooks.
+ */
+function bootstrap() {
+	add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\load_assets' );
+}
+
+/**
+ * Load slider assets.
+ */
 function load_assets() {
 	wp_enqueue_script(
 		'gonzo-slider-script',
@@ -17,4 +27,3 @@ function load_assets() {
 		filemtime( plugin_dir_path( dirname( __FILE__ ) ) . 'assets/css/slider.css' )
 	);
 }
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\load_assets' );
