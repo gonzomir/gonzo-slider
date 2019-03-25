@@ -20,6 +20,8 @@ window.addEventListener( 'DOMContentLoaded', function() {
       next = step,
       activeSlide = null,
       activePage = null,
+      pager = null,
+      pages = null,
       interval = sliderContainer.dataset.interval || 5000,
       hasPager = sliderContainer.dataset.pager || false,
       hasNav = sliderContainer.dataset.nav || false,
@@ -118,7 +120,7 @@ window.addEventListener( 'DOMContentLoaded', function() {
   }
 
   function setupPager() {
-    var pager = document.createElement('ul');
+    pager = document.createElement('ul');
     pager.className = 'gonzo-slider-pager';
     for( var i = 0, sl = slides.length; i < sl; i++ ) {
       var page = document.createElement('li');
@@ -126,7 +128,7 @@ window.addEventListener( 'DOMContentLoaded', function() {
       pager.appendChild(page);
     }
 
-    var pages = pager.querySelectorAll('a');
+    pages = pager.querySelectorAll('a');
     for( var i = 0, pl = pages.length; i < pl; i++ ) {
       pages[i].addEventListener( 'click', function( e ) {
         for(var i = 0, l = slides.length; i < l; i++){
